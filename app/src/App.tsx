@@ -23,6 +23,8 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
+const YELP_API_KEY = import.meta.env.VITE_API_KEY;
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 const App = () => {
 	const [allParks, setAllParks] = useState<Business[] | null>(null);
@@ -45,15 +47,14 @@ const App = () => {
 				`http://localhost:4000/http://api.yelp.com/v3/businesses/search?latitude=${coords?.latitude}&longitude=${coords?.longitude}&categories=parks&sort_by=best_match&limit=50`,
 				{
 					headers: {
-						Authorization:
-							"Bearer vGSKQ_xqocWt7Pjsb3CoqM3FnM0FWQoWqcB6IRWDPF2QZCiPpETA2qOSuGJowtEfKCv5Ao2pBcXOYdcVNISQX5_Y-MAgeRKCiraUgwv-EzquZzveIJxsHwoqdxYmZnYx",
+						Authorization: `"Bearer ${YELP_API_KEY}`,
 						accept: "application/json",
 					},
 				}
 			);
 			const yelpData: YelpResponse = await yelpResponse.json();
 			const weatherResponse = await fetch(
-				`https://api.openweathermap.org/data/2.5/weather?lat=${coords?.latitude}&lon=${coords?.longitude}&appid=746f28491ca056c4762c59bd41b9d735`
+				`https://api.openweathermap.org/data/2.5/weather?lat=${coords?.latitude}&lon=${coords?.longitude}&appid=${WEATHER_API_KEY}`
 			);
 			const weatherData: WeatherResponse = await weatherResponse.json();
 
