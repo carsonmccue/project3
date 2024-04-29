@@ -23,7 +23,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
-const YELP_API_KEY = import.meta.env.VITE_API_KEY;
+const YELP_API_KEY = import.meta.env.VITE_YELP_API_KEY;
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 const App = () => {
@@ -44,10 +44,10 @@ const App = () => {
 	const fetchNearbyParks = async () => {
 		try {
 			const yelpResponse = await fetch(
-				`http://localhost:4000/http://api.yelp.com/v3/businesses/search?latitude=${coords?.latitude}&longitude=${coords?.longitude}&categories=parks&sort_by=best_match&limit=50`,
+				`https://project3-yfq4.onrender.com/http://api.yelp.com/v3/businesses/search?latitude=${coords?.latitude}&longitude=${coords?.longitude}&categories=parks&sort_by=best_match&limit=50`,
 				{
 					headers: {
-						Authorization: `"Bearer ${YELP_API_KEY}`,
+						Authorization: `Bearer ${YELP_API_KEY}`,
 						accept: "application/json",
 					},
 				}
